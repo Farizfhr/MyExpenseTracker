@@ -25,7 +25,6 @@ fun TransactionItem(
             Text("Kategori: ${transaction.category}")
             Text("Tanggal: ${transaction.date}")
 
-            // 🔽 Nominal sudah diformat Rupiah bertitik
             Text("Nominal: ${formatRupiah(transaction.amount)}")
 
             Row(
