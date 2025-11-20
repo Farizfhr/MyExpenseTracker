@@ -24,7 +24,9 @@ fun TransactionItem(
             Text(transaction.name)
             Text("Kategori: ${transaction.category}")
             Text("Tanggal: ${transaction.date}")
-            Text("Nominal: Rp ${transaction.amount}")
+
+            // 🔽 Nominal sudah diformat Rupiah bertitik
+            Text("Nominal: ${formatRupiah(transaction.amount)}")
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
