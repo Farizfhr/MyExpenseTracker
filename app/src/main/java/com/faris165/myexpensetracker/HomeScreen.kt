@@ -23,14 +23,14 @@ fun HomeScreen(
     onAdd: () -> Unit,
     onEdit: (Transaction) -> Unit
 ) {
-    // 🔽 STATE FILTER KATEGORI
+    //  STATE FILTER KATEGORI
     var expanded by remember { mutableStateOf(false) }
     var selectedCategory by remember { mutableStateOf("Semua") }
 
-    // 🔽 Ambil list kategori unik
+    //  Ambil list kategori unik
     val categories = listOf("Semua") + transactions.map { it.category }.distinct()
 
-    // 🔽 Filter transaksi berdasarkan kategori
+    //  Filter transaksi berdasarkan kategori
     val filteredTransactions = if (selectedCategory == "Semua") {
         transactions
     } else {
@@ -87,7 +87,7 @@ fun HomeScreen(
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "Rp ${filteredTransactions.sumOf { it.amount }}",
+                        text = formatRupiah(filteredTransactions.sumOf { it.amount }),
                         style = MaterialTheme.typography.headlineLarge,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onPrimaryContainer
