@@ -6,6 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import java.util.*
 
@@ -14,6 +15,9 @@ fun AddEditScreen(
     existing: Transaction?,
     onSave: (Transaction) -> Unit
 ) {
+    val isEdit = existing != null
+    val title = if (isEdit) "Edit Transaksi" else "Tambah Transaksi"
+
     var name by remember { mutableStateOf(existing?.name ?: "") }
     var amount by remember { mutableStateOf(existing?.amount?.toString() ?: "") }
     var category by remember { mutableStateOf(existing?.category ?: "") }
@@ -22,6 +26,16 @@ fun AddEditScreen(
     val ctx = LocalContext.current
 
     Column(Modifier.padding(20.dp)) {
+
+        // =======================
+        //      TITLE
+        // =======================
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
 
         OutlinedTextField(
             value = name,
@@ -78,7 +92,7 @@ fun AddEditScreen(
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(if (existing == null) "Tambah" else "Simpan")
+            Text(if (isEdit) "Simpan Perubahan" else "Tambah")
         }
     }
 }
