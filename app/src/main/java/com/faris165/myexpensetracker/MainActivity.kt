@@ -18,6 +18,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val prefs = PrefsManager(this)
 
+            // LIST TRANSAKSI
             val transactions = remember { mutableStateOf(prefs.loadTransactions()) }
 
             NavHost(
@@ -25,6 +26,9 @@ class MainActivity : ComponentActivity() {
                 startDestination = "home"
             ) {
 
+                // =======================
+                // HOME
+                // =======================
                 composable("home") {
                     HomeScreen(
                         transactions = transactions.value,
@@ -41,8 +45,11 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
+                // =======================
+                // ADD / EDIT SCREEN
+                // =======================
                 composable(
-                    "addEdit?id={id}",
+                    route = "addEdit?id={id}",
                     arguments = listOf(
                         navArgument("id") {
                             type = NavType.StringType
